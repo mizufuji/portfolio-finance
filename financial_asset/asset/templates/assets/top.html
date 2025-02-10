@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>トップページ</title>
+    </head>
+    <body>
+        <p>資産リスト</p>
+        {% if assets %}
+        <table>
+            <thead>
+            <tr>
+                <th>資産名</th>
+                <th>数量</th>
+                <th>価格</th>
+                <th>種類</th>
+                <th>会社名</th>
+                <th>購入日</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for asset in assets %}
+            <tr>
+                <th>{{ asset.asset_name }}</th>
+                <th>{{ asset.quantity }}</th>
+                <th>{{ asset.price }}</th>
+                <th>{{ asset.asset_type }}</th>
+                <th>{{ asset.company_name }}</th>
+                <th>{{ asset.buying_date }}</th>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>資産はまだ登録されていません。</p>
+        {% endif %}
+    </body>
+</html>
