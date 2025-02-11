@@ -1,0 +1,44 @@
+{% extends 'assets/base.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}資産詳細ページ{% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    <h1>資産詳細ページ</h1>
+    {% if asset %}
+    <table>
+        <thead>
+            <tr>
+                <th>資産名</th>
+                <th>数量</th>
+                <th>価格</th>
+                <th>種類</th>
+                <th>会社名</th>
+                <th>購入日</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>{{ asset.asset_name }}</th>
+                <th>{{ asset.quantity }}</th>
+                <th>{{ asset.price }}</th>
+                <th>{{ asset.asset_type }}</th>
+                <th>{{ asset.company_name }}</th>
+                <th>{{ asset.buying_date }}</th>
+            </tr>
+        </tbody>
+    </table>
+    <form action="{% url 'asset_delete' asset.id %}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+        {% csrf_token %}
+        <button type="submit">削除</button>
+    </form>
+    {% else %}
+    <p>IDに誤りがあります。</p>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

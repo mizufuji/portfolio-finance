@@ -1,16 +1,19 @@
+{% extends 'assets/base.html' %}
 <!DOCTYPE html>
     <html lang="ja">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>資産登録ページ</title>
+        <title>{% block title %}資産登録ページ{% endblock %}</title>
     </head>
     <body>
+        {% block content %}
         <h1>資産登録画面</h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">登録</button>
         </form>
+        {% endblock %}
     </body>
 </html>

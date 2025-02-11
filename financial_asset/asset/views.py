@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from asset.forms import AssetForm
 
 
+@login_required
 def top(request):
     assets = Asset.objects.all()
     context = {"assets": assets}
@@ -19,6 +20,7 @@ def asset_list(request):
 """
 
 
+# Create処理
 @login_required
 def new_asset(request):
     if request.method == "POST":
@@ -35,6 +37,14 @@ def new_asset(request):
     return render(request, "assets/new_asset.html", {"form": form})
 
 
+# Read処理
+@login_required
+def asset_detail(request, id):
+    asset = get_object_or_404(Asset, id=id)
+    return render(request, "assets/asset_detail.html", {"asset": asset})
+
+
+# Update処理
 @login_required
 def asset_edit(request, id):
     asset = get_object_or_404(Asset, pk=id)
@@ -48,8 +58,12 @@ def asset_edit(request, id):
     return render(request, "assets/asset_edit.html", {"form": form})
 
 
-"""
+# Delete処理
 @login_required
 def asset_delete(request, id):
-    if request.method == "DELETE":
-"""
+    if request.method == "POST":
+        asset = get_object_or_404(Asset, id=id)
+        asset.delete()
+        return redirect("top")
+
+    return redirect("asset_detail", id=id)

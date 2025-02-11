@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログインページ</title>
+</head>
+<body>
+    <h1>ログイン</h1>
+
+    {% if user.is_authenticated %}
+        <p>すでにログインしています。</p>
+    {% else %}
+        {% if form.errors %}
+            <p style="color:red;">ユーザー名またはパスワードが正しくありません。</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="username">ユーザー名</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">パスワード</label>
+            <input type="password" id="password" name="password" required>
+
+
+            <input type="hidden" name="next" value="{{ next|default:'/' }}">
+
+            <button type="submit">ログイン</button>
+        </form>
+    {% endif %}
+    </body>
+</html>
