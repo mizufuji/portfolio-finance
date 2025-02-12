@@ -1,6 +1,11 @@
 header {
-    background-color: green;
+    background-color: lightblue;
+}
+header nav ul form {
+    position: absolute;
+    right: 10px;
+    top: 88px;
 }
 footer {
-    background-color: green;
+    background-color: lightblue;
 }

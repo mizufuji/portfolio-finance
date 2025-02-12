@@ -12,13 +12,11 @@
         <h1>My Django App</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'top' %}">資産リスト</a></li>
+                <a href="{% url 'top' %}">トップページへ戻る</a>
                 <form method="post" action = "{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit">ログアウト</button>
-                    <a href="{% url 'top' %}">キャンセル</a>
                 </form>
-            
             </ul>
         </nav>
     </header>
