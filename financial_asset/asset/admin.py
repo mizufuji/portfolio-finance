@@ -8,6 +8,7 @@ from asset.models import Asset
 class AssetAdmin(admin.ModelAdmin):
     list_display = (
         "id",
+        "user",
         "asset_name",
         "quantity",
         "price",

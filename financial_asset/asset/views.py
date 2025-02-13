@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 
 from asset.models import Asset
 
@@ -9,15 +8,10 @@ from asset.forms import AssetForm
 
 @login_required
 def top(request):
-    assets = Asset.objects.all()
+    assets = Asset.objects.filter(user=request.user)
     context = {"assets": assets}
+    # context["assets"] = context["assets"].filter(user=request.user)
     return render(request, "assets/top.html", context)
-
-
-"""
-def asset_list(request):
-    return HttpResponse("資産リスト")
-"""
 
 
 # Create処理
