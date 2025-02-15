@@ -4,13 +4,15 @@ from asset.models import Asset
 
 from django.contrib.auth.decorators import login_required
 from asset.forms import AssetForm
+import pandas
+import yfinance as yf
 
 
+# トップページ
 @login_required
 def top(request):
     assets = Asset.objects.filter(user=request.user)
     context = {"assets": assets}
-    # context["assets"] = context["assets"].filter(user=request.user)
     return render(request, "assets/top.html", context)
 
 
@@ -35,7 +37,24 @@ def new_asset(request):
 @login_required
 def asset_detail(request, id):
     asset = get_object_or_404(Asset, id=id)
-    return render(request, "assets/asset_detail.html", {"asset": asset})
+    ticker = yf.Ticker(asset.ticker_name)
+    latest_close_rate = ticker.history(period="1d")["Close"].iloc[-1]
+    latest_close_rate = float(f"{latest_close_rate:.2f}")
+    total_price = asset.price * asset.quantity
+    total_now_price = latest_close_rate * asset.quantity
+    profit_loss = f"{total_now_price - total_price:.0f}"
+    profit_loss = float(profit_loss)
+    return render(
+        request,
+        "assets/asset_detail.html",
+        {
+            "asset": asset,
+            "latest_close_rate": latest_close_rate,
+            "total_price": total_price,
+            "total_now_price": total_now_price,
+            "profit_loss": profit_loss,
+        },
+    )
 
 
 # Update処理

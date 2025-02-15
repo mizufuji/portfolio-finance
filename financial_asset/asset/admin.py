@@ -9,6 +9,7 @@ class AssetAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "user",
+        "ticker_name",
         "asset_name",
         "quantity",
         "price",

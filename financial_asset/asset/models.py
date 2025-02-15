@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class Asset(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    ticker_name = models.CharField("ティッカー", max_length=20, null=True, blank=True)
     asset_name = models.CharField("資産名", max_length=100, null=False)
     quantity = models.FloatField("数量", null=False)
     price = models.FloatField("価格", null=False)

@@ -9,3 +9,9 @@ header nav ul form {
 footer {
     background-color: lightblue;
 }
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}

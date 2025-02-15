@@ -19,6 +19,10 @@
                 <th>種類</th>
                 <th>会社名</th>
                 <th>購入日</th>
+                <th>現在価格</th>
+                <th>取得原価</th>
+                <th>現在価値</th>
+                <th>損益</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +33,10 @@
                 <th>{{ asset.asset_type }}</th>
                 <th>{{ asset.company_name }}</th>
                 <th>{{ asset.buying_date }}</th>
+                <th>{{ latest_close_rate }}</th>
+                <th>{{ total_price }}</th>
+                <th>{{ total_now_price }}</th>
+                <th class="{% if profit_loss > 0 %}green{% else %}red{% endif %}">{{ profit_loss }}</th>
             </tr>
         </tbody>
     </table>
