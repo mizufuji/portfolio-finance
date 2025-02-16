@@ -6,6 +6,12 @@ from django.contrib.auth.decorators import login_required
 from asset.forms import AssetForm
 import pandas
 import yfinance as yf
+import io
+import urllib
+import base64
+
+# import pandas_datareader
+import matplotlib.pyplot as plt
 
 
 # トップページ
@@ -37,13 +43,33 @@ def new_asset(request):
 @login_required
 def asset_detail(request, id):
     asset = get_object_or_404(Asset, id=id)
+
     ticker = yf.Ticker(asset.ticker_name)
+
     latest_close_rate = ticker.history(period="1d")["Close"].iloc[-1]
     latest_close_rate = float(f"{latest_close_rate:.2f}")
     total_price = asset.price * asset.quantity
     total_now_price = latest_close_rate * asset.quantity
     profit_loss = f"{total_now_price - total_price:.0f}"
     profit_loss = float(profit_loss)
+
+    df = ticker.history(period="1mo")
+
+    plt.figure(figsize=(12, 6))
+    plt.plot(df.index, df["Close"], label="Close Price", color="blue")
+    plt.xlabel("Date")
+    plt.ylabel("Price")
+    plt.title(f"Price Trend: {asset.ticker_name}")
+    plt.legend()
+    plt.grid()
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    string = base64.b64encode(buf.getvalue()).decode("utf-8")
+    uri = "data:image/png;base64," + string
+    plt.close()
+
     return render(
         request,
         "assets/asset_detail.html",
@@ -53,6 +79,7 @@ def asset_detail(request, id):
             "total_price": total_price,
             "total_now_price": total_now_price,
             "profit_loss": profit_loss,
+            "graph": uri,
         },
     )
 
