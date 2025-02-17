@@ -1,5 +1,6 @@
 header {
     background-color: lightblue;
+    margin: 0;
 }
 header nav ul form {
     position: absolute;
@@ -14,4 +15,7 @@ footer {
 }
 .red {
     color: red;
+}
+.profit_loss {
+    text-align: right;
 }

@@ -4,13 +4,14 @@ from asset.models import Asset
 
 from django.contrib.auth.decorators import login_required
 from asset.forms import AssetForm
-import pandas
 import yfinance as yf
 import io
-import urllib
 import base64
 
-# import pandas_datareader
+import matplotlib
+
+matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
 import japanize_matplotlib
 
@@ -21,11 +22,27 @@ def top(request):
     assets = Asset.objects.filter(user=request.user)
 
     ticker_list = []
+    profit_loss_list = []
+
+    usd_jpy = yf.Ticker("JPY=X")
+    usd_jpy = usd_jpy.history(period="1d")["Close"].iloc[-1]
+
     for asset in assets:
         ticker = yf.Ticker(asset.ticker_name)
         ticker_list.append(ticker)
 
-    plt.figure(figsize=(12, 4.8))
+        latest_close_rate = ticker.history(period="1d")["Close"].iloc[-1]
+        latest_close_rate = float(f"{latest_close_rate:.2f}")
+        total_price = asset.price * asset.quantity
+        if asset.asset_type == "暗号資産":
+            total_now_price = latest_close_rate * asset.quantity * usd_jpy
+        else:
+            total_now_price = latest_close_rate * asset.quantity
+        profit_loss = f"{total_now_price - total_price:.0f}"
+        profit_loss = int(profit_loss)
+        profit_loss_list.append(profit_loss)
+
+    plt.figure(figsize=(15, 10))
 
     for asset, ticker_asset in zip(assets, ticker_list):
         df = ticker_asset.history(period="1mo")
@@ -33,8 +50,6 @@ def top(request):
 
         if not df.empty:
             plt.plot(df.index, df["Close"], label=asset.asset_name)
-            # plt.plot(df.index, df["Close"], label=asset.ticker_name)
-            # df = df / df.iloc[0] * 100
 
     plt.xlabel("Date")
     plt.ylabel("Price")
@@ -49,7 +64,7 @@ def top(request):
     uri = "data:image/png;base64," + string
     plt.close()
 
-    context = {"assets": assets, "graph": uri}
+    context = {"assets": assets, "graph": uri, "profit_loss_list": profit_loss_list}
     return render(request, "assets/top.html", context)
 
 
@@ -60,9 +75,8 @@ def new_asset(request):
         form = AssetForm(request.POST)
         if form.is_valid():
             asset = form.save(commit=False)
+            asset.user = request.user
             asset.save()
-            # return redirect(asset_list, asset_id=asset.id)
-            # return redirect("top", asset_id=asset.id)
             return redirect("top")
     else:
         form = AssetForm()
@@ -76,14 +90,18 @@ def asset_detail(request, id):
     asset = get_object_or_404(Asset, id=id)
     print(asset)
     ticker = yf.Ticker(asset.ticker_name)
-    print(asset.ticker_name)
+    usd_jpy = yf.Ticker("JPY=X")
+    usd_jpy = usd_jpy.history(period="1d")["Close"].iloc[-1]
 
     latest_close_rate = ticker.history(period="1d")["Close"].iloc[-1]
     latest_close_rate = float(f"{latest_close_rate:.2f}")
-    total_price = asset.price * asset.quantity
-    total_now_price = latest_close_rate * asset.quantity
+    total_price = int(asset.price * asset.quantity)
+    if asset.asset_type == "暗号資産":
+        total_now_price = int(latest_close_rate * asset.quantity * usd_jpy)
+    else:
+        total_now_price = int(latest_close_rate * asset.quantity)
     profit_loss = f"{total_now_price - total_price:.0f}"
-    profit_loss = float(profit_loss)
+    profit_loss = int(profit_loss)
 
     df = ticker.history(period="1mo")
 
@@ -91,7 +109,7 @@ def asset_detail(request, id):
     plt.plot(df.index, df["Close"], label="Close Price", color="blue")
     plt.xlabel("Date")
     plt.ylabel("Price")
-    plt.title(f"Price Trend: {asset.ticker_name}")
+    plt.title("Price Trend")
     plt.legend()
     plt.grid()
 

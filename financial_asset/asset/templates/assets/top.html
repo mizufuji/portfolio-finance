@@ -1,4 +1,5 @@
 {% extends 'assets/base.html' %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -16,30 +17,44 @@
         {% if assets %}
         <table>
             <thead>
-            <tr>
-                <th>資産名</th>
-                <th>ティッカー</th>
-                <th>数量</th>
-                <th>価格</th>
-                <th>種類</th>
-                <th>会社名</th>
-                <th>購入日</th>
-            </tr>
+                <tr>
+                    <th>資産名</th>
+                    <th>ティッカー</th>
+                    <th>数量</th>
+                    <th>価格</th>
+                    <th>種類</th>
+                    <th>会社名</th>
+                    <th>購入日</th>
+                    <th>損益</th>
+                </tr>
             </thead>
             <tbody>
-            {% for asset in assets %}
-            <tr>
-                <th>{{ asset.asset_name }}</th>
-                <th>{{ asset.ticker_name }}</th>
-                <th>{{ asset.quantity }}</th>
-                <th>{{ asset.price }}</th>
-                <th>{{ asset.asset_type }}</th>
-                <th>{{ asset.company_name }}</th>
-                <th>{{ asset.buying_date }}</th>
-                <th><a href="{% url 'asset_detail' asset.id %}">詳細</a></th>
-                <th><a href="{% url 'asset_edit' asset.id %}">編集</a></th>
-            </tr>
-            {% endfor %}
+                {% for asset, profit_loss in assets|zip_lists:profit_loss_list %}
+                    <tr>  
+                        <td>{{ asset.asset_name }}</td>
+                        <td>{{ asset.ticker_name }}</td>
+                        <td>{{ asset.quantity }}</td>
+                        <td>{{ asset.price }}</td>
+                        <td>
+                            {% if asset.asset_type == "日本株" %}
+                                <i class="fas fa-flag" style="color: red;"></i> 🇯🇵
+                            {% elif asset.asset_type == "米国株" %}
+                                <i class="fas fa-flag-usa" style="color: blue;"></i> 🇺🇸
+                            {% elif asset.asset_type == "暗号資産" %}
+                                <i class="fab fa-bitcoin" style="color: orange;"></i>
+                            {% else %}
+                                <i class="fas fa-globe"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ asset.company_name }}</td>
+                        <td>{{ asset.buying_date }}</td>
+                        <td class="{% if profit_loss > 0 %}green{% else %}red{% endif %} profit_loss">
+                            {{ profit_loss|format_number }}
+                        </td>
+                        <td><a href="{% url 'asset_detail' asset.id %}">詳細</a></td>
+                        <td><a href="{% url 'asset_edit' asset.id %}">編集</a></td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
         <img src="{{ graph }}" alt="Your Asset Price">

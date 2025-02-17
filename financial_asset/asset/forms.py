@@ -15,3 +15,6 @@ class AssetForm(forms.ModelForm):
             "company_name",
             "buying_date",
         )
+        help_texts = {
+            "ticker_name": "※日本株の場合はティッカーシンボルの後に.Tをつけてください。"
+        }
