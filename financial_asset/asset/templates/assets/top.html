@@ -18,6 +18,7 @@
             <thead>
             <tr>
                 <th>資産名</th>
+                <th>ティッカー</th>
                 <th>数量</th>
                 <th>価格</th>
                 <th>種類</th>
@@ -29,6 +30,7 @@
             {% for asset in assets %}
             <tr>
                 <th>{{ asset.asset_name }}</th>
+                <th>{{ asset.ticker_name }}</th>
                 <th>{{ asset.quantity }}</th>
                 <th>{{ asset.price }}</th>
                 <th>{{ asset.asset_type }}</th>
@@ -40,6 +42,7 @@
             {% endfor %}
             </tbody>
         </table>
+        <img src="{{ graph }}" alt="Your Asset Price">
         {% else %}
         <p>資産はまだ登録されていません。</p>
         {% endif %}

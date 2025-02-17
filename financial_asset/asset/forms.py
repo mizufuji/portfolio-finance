@@ -8,6 +8,7 @@ class AssetForm(forms.ModelForm):
         model = Asset
         fields = (
             "asset_name",
+            "ticker_name",
             "quantity",
             "price",
             "asset_type",
