@@ -14,7 +14,7 @@ header nav ul form {
 }
 footer {
     background-color: lightblue;
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -30,4 +30,7 @@ footer {
 }
 .profit_loss {
     text-align: right;
+}
+body {
+    padding-top: 100px;
 }
