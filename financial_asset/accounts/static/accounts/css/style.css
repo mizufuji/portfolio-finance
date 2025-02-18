@@ -1,11 +1,24 @@
 header {
     background-color: lightblue;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
 }
 header ul {
     margin: 0 0 0 auto;
 }
 footer {
     background-color: lightblue;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
 }
 body form label {
     display: block;
@@ -15,4 +28,14 @@ body form input {
 }
 body form button {
     margin-top: 10px;
+}
+body form {
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+body form input {
+    display: flex;
 }

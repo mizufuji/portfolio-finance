@@ -31,10 +31,18 @@
             <tbody>
                 {% for asset, profit_loss in assets|zip_lists:profit_loss_list %}
                     <tr>  
-                        <td>{{ asset.asset_name }}</td>
-                        <td>{{ asset.ticker_name }}</td>
-                        <td>{{ asset.quantity }}</td>
-                        <td>{{ asset.price }}</td>
+                        <td style="text-align: center;">
+                            {{ asset.asset_name }}
+                        </td>
+                        <td>
+                            {{ asset.ticker_name }}
+                        </td>
+                        <td>
+                            {{ asset.quantity }}
+                        </td>
+                        <td style="text-align: right;">
+                            {{ asset.price|format_number }}
+                        </td>
                         <td>
                             {% if asset.asset_type == "日本株" %}
                                 <i class="fas fa-flag" style="color: red;"></i> 🇯🇵
@@ -47,7 +55,9 @@
                             {% endif %}
                         </td>
                         <td>{{ asset.company_name }}</td>
-                        <td>{{ asset.buying_date }}</td>
+                        <td style="text-align: right;">
+                            {{ asset.buying_date }}
+                        </td>
                         <td class="{% if profit_loss > 0 %}green{% else %}red{% endif %} profit_loss">
                             {{ profit_loss|format_number }}
                         </td>
