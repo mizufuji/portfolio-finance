@@ -11,9 +11,6 @@ header {
     color: white;
     text-align: center;
 }
-header ul {
-    margin: 0 0 0 auto;
-}
 footer {
     background-color: lightblue;
     position: fixed;
@@ -22,24 +19,52 @@ footer {
     width: 100%;
     color: white;
     text-align: center;
-    padding: 10px 0;
 }
-body form label {
-    display: block;
-}
-body form input {
-    display: block;
-}
-body form button {
-    margin-top: 10px;
-}
-body form {
-    margin-top: 150px;
+body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
     align-items: center;
     justify-content: center;
 }
-body form input {
-    display: flex;
+form label {
+    display: block;
+}
+form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+form button {
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(226, 146, 25);
+    color: white;
+    border-radius: 4px;
+    width: 100%;
+}
+form .login_input {
+    max-width: 300px;
+}
+form .login_button {
+    margin-top: 30px;
+    max-width: 300px;
+}
+body div {
+    margin-top: 20px;
+    text-align: center;
 }

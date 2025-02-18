@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}会員登録{% endblock %}</title>
 </head>
 <body>
     {% block content %}
-    <h2>会員登録</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">会員登録</button>
     </form>
+    <div>
+        <a href="{% url 'login' %}">ログイン画面へ戻る</a>
+    </div>
     {% endblock %}
 </body>
 </html>

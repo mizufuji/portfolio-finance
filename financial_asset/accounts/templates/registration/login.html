@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログインページ</title>
+    <title>{% block title %}ログイン{% endblock %}</title>
 </head>
 <body>
     {% block content %}
@@ -18,16 +18,19 @@
             <form method="post">
                 {% csrf_token %}
                 <label for="username">ユーザー名</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" class="login_input" required>
     
                 <label for="password">パスワード</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" class="login_input" required>
     
                 <input type="hidden" name="next" value="{{ next|default:'/' }}">
     
-                <button type="submit">ログイン</button>
+                <button type="submit" class="login_button">ログイン</button>
             </form>
         {% endif %}
+        <div>
+            <a href="{% url 'signup' %}">会員登録はこちら</a>
+        </div>
     {% endblock %}
     </body>
 </html>
