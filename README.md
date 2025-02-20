@@ -1,12 +1,12 @@
 PythonのDjangoフレームワークを用いて、金融資産の損益状況とチャートを表示します。
 
-■言語:Python
+## ■言語:Python
 
-■構造: UI・・・HTML/CSS
+## ■構造: UI・・・HTML/CSS
 
-フレームワーク・・・Django(Python)
+## ■フレームワーク・・・Django(Python)
 
-Database・・・Sqlite3
+## ■Database・・・Sqlite3
 
 
 ## ■ディレクトリ構成
