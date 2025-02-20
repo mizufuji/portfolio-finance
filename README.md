@@ -2,11 +2,11 @@ PythonのDjangoフレームワークを用いて、金融資産の損益状況�
 
 ## ■言語:Python
 
-## ■UI・・・HTML/CSS
+## ■UI:HTML/CSS
 
-## ■フレームワーク・・・Django(Python)
+## ■フレームワーク:Django(Python)
 
-## ■Database・・・Sqlite3
+## ■Database:Sqlite3
 
 
 ## ■ディレクトリ構成
