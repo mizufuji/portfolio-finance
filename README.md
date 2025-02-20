@@ -10,7 +10,7 @@ Database・・・Sqlite3
 
 
 ■ディレクトリ構成
-■ディレクトリ構成
+```plaintext
 financial_asset
 │  │  db.sqlite3
 │  │  manage.py
