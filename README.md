@@ -1,3 +1,8 @@
+## ■画像
+![image](https://github.com/user-attachments/assets/7cb9e3d7-8652-49d5-bd7a-ac64ce04c147)
+![image](https://github.com/user-attachments/assets/e61568c4-48ff-4739-b4f8-02c995321ab2)
+
+
 ```plaintext
 PythonのDjangoフレームワークを用いて、金融資産の損益状況とチャートを表示します。
 CRUD操作が可能で、
@@ -6,6 +11,8 @@ Read・・・・金融資産の情報の詳細表示（過去1ヶ月間のレー
 Update・・・金融資産の情報の更新（保有数の変更等）
 Delete・・・金融資産の削除
 ができます。
+```
+
 
 ## ■構成
 ・ログイン画面
@@ -23,13 +30,6 @@ Delete・・・金融資産の削除
 ## ■UI:HTML/CSS
 
 ## ■Database:Sqlite3
-```
-
-## ■画像
-![image](https://github.com/user-attachments/assets/7cb9e3d7-8652-49d5-bd7a-ac64ce04c147)
-![image](https://github.com/user-attachments/assets/e61568c4-48ff-4739-b4f8-02c995321ab2)
-
-
 
 ## ■ディレクトリ構成
 ```plaintext
