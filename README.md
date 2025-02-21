@@ -23,6 +23,7 @@ Delete・・・金融資産の削除
 ## ■UI:HTML/CSS
 
 ## ■Database:Sqlite3
+```
 
 ## ■画像
 ![image](https://github.com/user-attachments/assets/7cb9e3d7-8652-49d5-bd7a-ac64ce04c147)
