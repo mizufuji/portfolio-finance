@@ -10,7 +10,8 @@ PythonのDjangoフレームワークを用いて、金融資産の損益状況�
 
 ## ■画像
 ![image](https://github.com/user-attachments/assets/7cb9e3d7-8652-49d5-bd7a-ac64ce04c147)
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/e61568c4-48ff-4739-b4f8-02c995321ab2)
+
 
 
 ## ■ディレクトリ構成
