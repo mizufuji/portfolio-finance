@@ -8,6 +8,9 @@ PythonのDjangoフレームワークを用いて、金融資産の損益状況�
 
 ## ■Database:Sqlite3
 
+■画像
+![image](https://github.com/user-attachments/assets/7cb9e3d7-8652-49d5-bd7a-ac64ce04c147)
+
 
 ## ■ディレクトリ構成
 ```plaintext
