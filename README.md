@@ -1,3 +1,4 @@
+```plaintext
 PythonのDjangoフレームワークを用いて、金融資産の損益状況とチャートを表示します。
 CRUD操作が可能で、
 Create・・・金融資産の登録
