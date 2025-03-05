@@ -36,3 +36,12 @@ Thumbs.db
 
 # Backup files
 *~
+
+# Static files
+staticfiles/
+
+# Django related
+*.log
+*.pot
+*.pyc
+__pycache__
