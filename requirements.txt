@@ -38,5 +38,6 @@ typing-extensions==4.12.2
 tzdata==2025.1
 urllib3==2.3.0
 webencodings==0.5.1
+whitenoise==6.9.0
 yfinance==0.2.54
 zipp==3.21.0
