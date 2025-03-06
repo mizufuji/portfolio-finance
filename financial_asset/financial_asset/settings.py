@@ -15,7 +15,7 @@ SECRET_KEY = "django-insecure-h)0(*zy6wc%__g)#cs(%!uyr9h2(e^oe@xt1dnj0mm%lzu9ejx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv("RENDER_EXTERNAL_HOSTNAME", "portfolio-finance.onrender.com")]
 
 
 # Application definition
